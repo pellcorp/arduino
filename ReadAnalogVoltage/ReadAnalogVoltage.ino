@@ -1,8 +1,14 @@
-int pin5 = 5;
-int pin6 = 6;
-int pin8 = 8;
-int pin9 = 9;
-int state = 0;
+/*
+  ReadAnalogVoltage
+
+  Reads an analog input on pin 0, converts it to voltage, and prints the result to the Serial Monitor.
+  Graphical representation is available using Serial Plotter (Tools > Serial Plotter menu).
+  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
+
+  This example code is in the public domain.
+
+  http://www.arduino.cc/en/Tutorial/ReadAnalogVoltage
+*/
 
 int pinOut = 10;
 
@@ -18,17 +24,13 @@ int total = 0;                  // the running total
 int average = 0;                // the average
 
 int inputPin = A0;
+int lastRead = 0;
 
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(pin5, OUTPUT);
-  pinMode(pin6, OUTPUT);
-  pinMode(pin8, INPUT);
-  pinMode(pin9, INPUT);
-
-  Serial.begin(9600);
-
   pinMode(pinOut, OUTPUT);
+  
+  // initialize serial communication with computer:
+  Serial.begin(9600);
   
   // initialize all the readings to 0:
   for (int thisReading = 0; thisReading < numReadings; thisReading++) {
@@ -54,43 +56,25 @@ int getReading() {
 
   // calculate the average:
   average = total / numReadings;
+
   // send it to the computer as ASCII digits
- //Serial.println(average);
-  delay(1);
   return average;
 }
+
+int getFinalReading() {
+  int reading = 0;
+  for (int thisReading = 0; thisReading < numReadings; thisReading++) {
+    reading = getReading();
+    delay(100);
+  }
+  return reading;
+}
+
+// the loop routine runs over and over again forever:
 void loop() {
-  
-
-  // this is positive
-  if(digitalRead(pin8) == HIGH)
-  {
-    if (state != pin8) {
-      state = pin8;
-      Serial.println("Turning Pin 8 on");
-      digitalWrite(pin5, HIGH);
-      digitalWrite(pin6, LOW);
-    }
+  int reading = getFinalReading();
+  if (lastRead != reading) {
+    lastRead = reading;
+    Serial.println(reading);
   }
-
-  // this is negative
-  if(digitalRead(pin9) == HIGH)
-  {
-    if (state != pin9) {
-      state = pin9;
-      Serial.println("Turning Pin 9 on");
-      digitalWrite(pin5, LOW);
-      digitalWrite(pin6, HIGH); 
-    }
-  }
-
-  int reading = getReading();
-  Serial.println(reading);
-  delay(100);
-    
-  // so if we have a reading of less than 100, we want to stop the motor as we are
-  // at the highest tension and dont want to damage the motor or cable
-  //if (reading < 100) {
-    
-//  }
 }
