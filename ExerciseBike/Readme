@@ -1,0 +1,14 @@
+My magnetic resistance exercise bike computer has died.  Rather than bye a new exercise bike I decided to see if I could make do with some basic functions such as being able to vary the resistance by directly manipulating the wiring.
+
+So mark 0, was a set of jumper wires connected to the exercise bike computer connector, and altering the polarity of the motor to reduce or increase the resistance.
+
+Mark 1, is a simple arduino + motor controller combination and some switches so I could alter the resistance via buttons.
+
+Mark 2, will be adding validation to ensure I don't over tighten or over loosen the resistance by monotoring the analog readings from the potentiometer.
+
+Mark 3, will be adding a simple oled display to display the current resistance
+
+Mark 4, will be very simple programmes where I automatically adjust the resistance over the course of the programme and display some simple info on the oled such as current resistance and how much longer the programme has to run.
+
+As part of mark 4, will be removing the resistance at the end of the programme to lessen strain on the cabling.
+
