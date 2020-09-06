@@ -1,0 +1,22 @@
+The specs of my display are:
+
+TZT
+GME12864-52
+0.96" 4P White
+
+
+To connect to an arduino nano as follows:
+
+GND -> GND
+VDD -> 3V3
+SCK -> A5
+SDA -> A4
+
+The address is not the default (0x3D), but is instead 0x3C
+
+I discovered this using the I2C_Scanner (Had to change the serial monitor to 115200
+
+
+https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples
+
+https://www.silabs.com/community/wireless/proprietary/knowledge-base.entry.html/2019/02/14/creating_monochrome-ICUo
